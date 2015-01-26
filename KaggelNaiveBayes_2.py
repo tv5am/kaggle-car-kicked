@@ -51,8 +51,6 @@ NotIsBadBuy_count = PofC_train[0]
 print("IsBadBuy count = " + str(PofC_train[1]))
 print("Is Not BadBuy count = " + str(PofC_train[0]))
 
-# for k,v in class_zero.items():
-#     print(k, " : ", v)
 
 #probability of IsBadBuy in Training file
 prob_IsBadBuy = float((PofC_train[1]))/trngfile_line_ctr
@@ -70,8 +68,7 @@ predicted_class_list = []
 for line in trng_file:
     attr_list = []
     line_ctr+=1
-    # if(line_ctr == 1):
-    #     continue
+       continue
     line = line.replace("\n","")
 
     attr = line.split(",")
@@ -86,19 +83,11 @@ for line in trng_file:
 
     class_value = int(attr[len(attr_list)-1])
 
-    # if((float(attr_list[22]) - float(attr_list[18])) == float(0) ):
-    #     IsBadBuy = True
-    # else :
-    #     IsBadBuy = False
-
-
     for z in range(3,len(attr_list)-1):
     #for item in attr_list:
         item = int(float(attr_list[z]))
         #print((z, item))
         if ((z, item) in class_zero):
-            #print("key in class_zero = ", (z, item) )
-            #print("count in class_zero " + str(class_zero[(z, item)]))
             cond_prob_NotIsBadBuy = float(class_zero[(z, item)])/NotIsBadBuy_count
             final_cond_prob_NotIsBadBuy *= cond_prob_NotIsBadBuy
             #print("Negative conditional prob = " + str(final_cond_prob_NotIsBadBuy))
@@ -107,8 +96,6 @@ for line in trng_file:
             final_cond_prob_NotIsBadBuy *= cond_prob_NotIsBadBuy
 
         if ((z, item) in class_one):
-            #print("key in class_one = ", (z, item) )
-            #print("count in class_one " + str(class_one[(z, item)]))
             cond_prob_IsBadBuy = float(class_one[(z, item)])/IsBadBuy_count
             #print("cond_prob_IsBadBuy = " + str(cond_prob_IsBadBuy))
             final_cond_prob_IsBadBuy *= cond_prob_IsBadBuy
@@ -120,8 +107,6 @@ for line in trng_file:
     final_cond_prob_IsBadBuy*=prob_IsBadBuy
     #print("final_cond_prob_IsBadBuy = " + str(final_cond_prob_IsBadBuy))
     final_cond_prob_NotIsBadBuy*=prob_NotIsBadBuy
-    #print("final_cond_prob_NotIsBadBuy = " + str(final_cond_prob_NotIsBadBuy))
-    #print("-----------------------------------------")
     if(IsBadBuy):
         predicted_class = 1
     elif(final_cond_prob_IsBadBuy > final_cond_prob_NotIsBadBuy):
@@ -166,8 +151,6 @@ predicted_class_list = []
 for line in test_file:
     attr_list = []
     line_ctr+=1
-    # if(line_ctr == 1):
-    #     continue
     line = line.replace("\n","")
 
     attr = line.split(",")
@@ -181,19 +164,6 @@ for line in test_file:
     final_cond_prob_IsBadBuy = 1
     predicted_class_list = []
     IsBadBuy= False
-
-    # if((float(attr_list[21]) - float(attr_list[17])) == float(0) or (float(attr_list[21]) - float(attr_list[17])) == float(110)):
-    #     IsBadBuy = True
-    # if((float(attr_list[8])) == 26 or ref_id%8==0):
-    #     IsBadBuy = True
-    # if(float(attr_list[12]) > 70000 and float(attr_list[3]) == 2004):
-    #     IsBadBuy = True
-    # if(float(attr_list[3]) == 2004 and float(attr_list[6])>100):
-    #     IsBadBuy = True
-    # if(int(attr_list[3]) == 2004):
-    #     IsBadBuy = True
-    # if(int(attr_list[3]) == 2005 and (int(attr_list[12]) > 80000 )):
-    #     IsBadBuy = True
 
     if((float(attr_list[21]) - float(attr_list[17])) == float(0) or (float(attr_list[21]) - float(attr_list[17])) == float(110)):
         IsBadBuy = True
@@ -212,12 +182,6 @@ for line in test_file:
         IsBadBuy = True
     if(int(attr_list[4]) == 9):
         IsBadBuy = True
-    # if(int(attr_list[3]==2006) and int(attr_list[5])==4):
-    #     IsBadBuy = True
-    # if(float(attr_list[3]) == 2004 and float(attr_list[7])>100):
-    #     IsBadBuy = True
-    # if((int(attr_list[3]) == 2005) and int(attr_list[4])==5 and int(attr_list[12]) > 0):
-    #     IsBadBuy = True
     if((int(attr_list[3]) == 2006) and int(attr_list[5])==4 and (int(attr_list[8]) >= 100 )):
         IsBadBuy = True
 
@@ -242,8 +206,6 @@ for line in test_file:
         item = int(float(attr_list[z]))
         #print((z, item))
         if ((z, item) in class_zero):
-            #print("key in class_zero = ", (z, item) )
-            #print("count in class_zero " + str(class_zero[(z, item)]))
             cond_prob_NotIsBadBuy = float(class_zero[(z, item)])/NotIsBadBuy_count
             final_cond_prob_NotIsBadBuy *= cond_prob_NotIsBadBuy
             #print("Negative conditional prob = " + str(final_cond_prob_NotIsBadBuy))
@@ -252,8 +214,6 @@ for line in test_file:
         #     final_cond_prob_NotIsBadBuy *= cond_prob_NotIsBadBuy
 
         if ((z, item) in class_one):
-            #print("key in class_one = ", (z, item) )
-            #print("count in class_one " + str(class_one[(z, item)]))
             cond_prob_IsBadBuy = float(class_one[(z, item)])/IsBadBuy_count
             #print("cond_prob_IsBadBuy = " + str(cond_prob_IsBadBuy))
             final_cond_prob_IsBadBuy *= cond_prob_IsBadBuy
@@ -324,9 +284,7 @@ for k in range(0, rounds):
         d.remove(1)
     #print("d = " + str(d))
     predicted_class_list = []
-    # sample_c_pos1={}
-    # sample_c_neg1={}
-    sample_class_zero = {}
+   sample_class_zero = {}
     sample_class_one= {}
 
     for line_num in d:
